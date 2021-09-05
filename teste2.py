@@ -1,9 +1,11 @@
 import csv
 
+
 nome = []
 idade = []
 valor = []
 di = []
+usuarios = ["DJ", "EF"]
 
 for d in csv.DictReader(open('PYTHON\projetos\PFNoobs\Opening\SAVE.csv'), delimiter=','):
     nome.append(d["NOME"])
@@ -42,9 +44,9 @@ for i in nome:
                 if diSTR1 == "#01":
                     cod = 1
                     break
-            if i == len(di):
-                print("Sua id não foi confirmada!")
-                break
+        else:
+            print("ID não encontrada!")
+            break
     elif entradaNome == nomeSTR2:
         print("Nome 2 confirmado!")
         for i in di:
@@ -53,11 +55,14 @@ for i in nome:
                 if diSTR2 == "#02":
                     cod = 2
                     break
-            if i == len(di):
-                print("Sua id não foi confirmada!")
-                break
-    if i == len(nome):
-        print("Seu nome não foi confirmado!")
+        else:
+            print("ID não encontrada!")
+            break
+    else:
+        print("Você não foi encontrado!")
+        break
+    if cod == 0 and i == len(nome):
+        print("Você não foi encontrado!")
         break
 if cod == 1:
     print(f"{nomeSTR1} - Sua entrada foi permitida! Você tem {idadeSTR1} anos e {valorSTR1} reais")
