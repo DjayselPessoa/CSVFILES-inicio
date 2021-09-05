@@ -5,7 +5,6 @@ nome = []
 idade = []
 valor = []
 di = []
-usuarios = ["DJ", "EF"]
 
 for d in csv.DictReader(open('PYTHON\projetos\PFNoobs\Opening\SAVE.csv'), delimiter=','):
     nome.append(d["NOME"])
