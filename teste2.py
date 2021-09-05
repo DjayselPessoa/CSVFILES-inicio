@@ -7,7 +7,7 @@ valor = []
 di = []
 usuarios = ["DJ", "EF"]
 
-for d in csv.DictReader(open('PYTHON\projetos\PFNoobs\Opening\SAVE.csv'), delimiter=','):
+for d in csv.DictReader(open('PYTHON\projetos\PFNoobs\Opening\SAVE.csv'), delimiter=','): # mudar para o link do arquivo SAVE.csv no seu diretório
     nome.append(d["NOME"])
     idade.append(d["IDADE"])
     valor.append(d["VALOR"])
