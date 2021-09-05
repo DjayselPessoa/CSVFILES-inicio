@@ -1,5 +1,4 @@
 import csv
-from os import close
 
 nome = []
 idade = []
