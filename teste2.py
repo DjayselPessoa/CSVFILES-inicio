@@ -1,69 +1,80 @@
 import csv
+from csv import writer
 
 
-nome = []
-idade = []
-valor = []
-di = []
+active = True
+while active:
+    try:
+        nome = []
+        idade = []
+        valor = []
+        di = []
 
-for d in csv.DictReader(open('PYTHON\projetos\PFNoobs\Opening\SAVE.csv'), delimiter=','): # mudar para o link do arquivo SAVE.csv no seu diretório
-    nome.append(d["NOME"])
-    idade.append(d["IDADE"])
-    valor.append(d["VALOR"])
-    di.append(d["ID"])
+        for d in csv.DictReader(open('PYTHON\projetos\PFNoobs\Opening\SAVE.csv'), delimiter=','):
+            nome.append(d["NOME"])
+            idade.append(d["IDADE"])
+            valor.append(d["VALOR"])
+            di.append(d["ID"])
+        nomeSTR = str
+        idadeSTR = str
+        diSTR = str
+        valorSTR = str
 
-print("NOME = ", nome)
-print("IDADE = ", idade)
-print("VALOR = ", valor)
-print("ID = ", di)
+        cod = 0
+        cont1 = 0
+        lugar1 = 0
 
-nomeSTR1 = nome[0]
-idadeSTR1 = idade[0]
-valorSTR1 = valor[0]
-diSTR1 = di[0]
-nomeSTR2 = nome[1]
-idadeSTR2 = idade[1]
-valorSTR2 = valor[1]
-diSTR2 = di[1]
+        entradaNome = str(input("Informe nome: "))
+        entradaId = str(input("Informe id: "))
+        entradaCriar = str(input("Entrar - Criar - Sair - Printar -> "))
+        valorInicial = "0.0"
+        lugar = 0
 
-cod = 0
+        if entradaCriar in "criar":
+            position = "#" + str((len(di)) + 1)
+            print(position)
+            criandoIdade = str(input("Informe sua idade: "))
+            with open('PYTHON\projetos\PFNoobs\Opening\SAVE.csv', 'a+', newline='\n') as escreverFile:
+                data = [(entradaNome), (criandoIdade), (position), (valorInicial)]
+                print(data)
+                d2 = writer(escreverFile)
+                d2.writerow(data)
+            escreverFile.close()
+            print("PROFILE CRIADO!")
+        elif entradaCriar in "entrar":
+            for i in nome:
+                testeNome = nome[cont1]
+                # print("testeNome", testeNome)
+                if testeNome == entradaNome:
+                    lugar1 = cont1
+                    print("Nome encontrado!")
+                    if di[lugar1] == entradaId:
+                        print("ID encontrada!")
+                        print("Sua entrada foi permitida!")
+                        nomeSTR = nome[lugar1]
+                        idadeSTR = idade[lugar1]
+                        valorSTR = valor[lugar1]
+                        print(f"{nomeSTR} - Sua entrada foi permitida! Você tem {idadeSTR} anos e {valorSTR} reais")
+                        raise ValueError("REINICIANDO!")
+                    else:
+                        cont1 += 1
+                        continue
+                else:
+                    cont1 += 1
+                    continue
+            if cont1 == len(nome):
+                        print("Entrada não permitida!")
+                        raise ValueError("REINICIANDO!")
+        elif entradaCriar in "sair":
+            print("Seus dados estão salvos!")
+            active = False
+            raise ValueError("DESLIGANDO!")
 
-entradaNome = str(input("Informe nome: "))
-entradaId = str(input("Informe id: "))
+        elif entradaCriar in "printar":
+            print("NOME = ", nome)
+            print("IDADE = ", idade)
+            print("VALOR = ", valor)
+            print("ID = ", di)
 
-for i in nome:
-    if cod == 1 or cod == 2:
-        print("Saindo!")
-        break
-    if entradaNome == nomeSTR1:
-        print("Nome 1 confirmado!")
-        for i in di:
-            if entradaId == diSTR1:
-                print("Id confirmada!")
-                if diSTR1 == "#01":
-                    cod = 1
-                    break
-        else:
-            print("ID não encontrada!")
-            break
-    elif entradaNome == nomeSTR2:
-        print("Nome 2 confirmado!")
-        for i in di:
-            if entradaId == diSTR2:
-                print("Id confirmada!")
-                if diSTR2 == "#02":
-                    cod = 2
-                    break
-        else:
-            print("ID não encontrada!")
-            break
-    else:
-        print("Você não foi encontrado!")
-        break
-    if cod == 0 and i == len(nome):
-        print("Você não foi encontrado!")
-        break
-if cod == 1:
-    print(f"{nomeSTR1} - Sua entrada foi permitida! Você tem {idadeSTR1} anos e {valorSTR1} reais")
-elif cod == 2:
-    print(f"{nomeSTR2} - Sua entrada foi permitida! Você tem {idadeSTR2} anos e {valorSTR2} reais")
+    except ValueError as e:
+        print("LOG: -> ", e)
