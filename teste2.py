@@ -15,6 +15,7 @@ while active:
             idade.append(d["IDADE"])
             valor.append(d["VALOR"])
             di.append(d["ID"])
+
         nomeSTR = str
         idadeSTR = str
         diSTR = str
@@ -71,6 +72,7 @@ while active:
             raise ValueError("DESLIGANDO!")
 
         elif entradaCriar in "printar":
+            # ainda n sei o motivo de não mostrar a ultima atualização sem ter de recomeçar o codigo
             print("NOME = ", nome)
             print("IDADE = ", idade)
             print("VALOR = ", valor)
